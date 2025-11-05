@@ -1,7 +1,7 @@
 let frame1;
 let frame2;
 let mariposas = [];
-let mariposaQty=5;
+let mariposaQty=8;
 
 
 function preload() {
@@ -10,7 +10,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight*2);
   //background(0,0);
 
   imageMode(CENTER);  
@@ -48,7 +48,6 @@ function mousePressed() {
     }
   }
 }
-
 class Marisopa {
   constructor(x, y, w, h, img1, img2) {
     this.x = x;
@@ -93,7 +92,7 @@ move() {
   this.y = map(noise(this.ty), 0, 1, 0, height);
 
   // Avanzar el ruido
-  this.tx += 0.002;
+  this.tx += 0.0021;
   this.ty += 0.002;
 }
 
