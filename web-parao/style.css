@@ -59,4 +59,35 @@
     #inicio {
       text-align: center;
     }
+  body {
+              margin: 0;
+        height: 3000px; /* para poder hacer scroll */
+        background: linear-gradient(#fefefe, #e0f0ff);
+        }
+img {
+ display: block;
+ width: 600px;
+ height: 1200px;
+ margin:10% auto;
+ background-color: #ddd;
+}
+header {
+ position: absolute ;
+ top: 0;
+ width: 100%;
+ background-color: #ffde21;
+ font-family: 'Courier New', Courier, monospace;
+ color: black;
+ text-align: center;
+ padding: 10px 0;
+ z-index: 700;
+}
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none; /* permite hacer clic sobre los elementos debajo */
+}
+
   
