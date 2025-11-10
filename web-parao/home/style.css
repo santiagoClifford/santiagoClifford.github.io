@@ -23,15 +23,17 @@ body {
 
 /* HEADER */
 header {
-  position: relative;
+  position: absolute;
   top: 0;
   width: 100%;
   background-color: #ffde21;
   font-family: 'Courier New', Courier, monospace;
+  font-size:10px;
   color: black;
   text-align: center;
-  padding: 10px 0;
+  padding: 5px 0;
   z-index: 10;
+  margin-bottom:150px;
 }
 
 /* CONTENIDO PRINCIPAL */
@@ -43,10 +45,9 @@ main {
 /* IMÁGENES */
 img {
   display: block;
-  width: 600px;
-  height: 1200px;
-  margin: 10% auto;
-  
+  width: 400px;
+  height: 800px;
+  margin: 10% auto;  
 }
 
 /* CANVAS DE P5 */
