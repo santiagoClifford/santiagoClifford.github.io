@@ -1,56 +1,105 @@
-let particles = [];
+let filas = [];
+const numFilas = 17;
+const alturaFila = 25;
+const separacion = 2;
+const velocidad = 1.2;
+
+let burdeo;
+let teel;
+let azul;
+const paleta = [];
 
 function setup() {
-  createCanvas(600, 600);
-    // Initialize particles and add them to array
-  for (let i = 0; i < 400; i++) {
-    particles.push(new Particle());
+    // full-window fixed background canvas
+  let c = createCanvas(windowWidth, windowHeight);
+  c.position(0, 0);
+  c.style('position', 'fixed');   // fijo al viewport
+  c.style('top', '0px');
+  c.style('left', '0px');
+  c.style('z-index', '0');        // z-index bajo
+  c.style('pointer-events', 'none'); // no bloquea clicks
+  c.id('spaceCanvas');
+
+  burdeo = color(69, 12, 28);
+ teel = color(17, 72, 82);
+ azul = color(0, 0, 87);
+  
+    paleta.push(burdeo);
+  paleta.push(teel);
+  paleta.push(azul);
+
+  
+  // Crear filas
+  //   for(valor inicial; valor final; alteración)
+  for (let i = 0; i < numFilas; i++) {
+    let y = i * (alturaFila + 0) - 10; // Espacio entre filas
+    let direccion = random([-1, 1]); // -1 = izquierda, 1 = derecha
+
+    let rectangulosFila = [];
+    let x = 0;
+
+    // Generar rectángulos para esta fila
+    while (x < width * 1.5) {
+      let ancho = random(60, 120);
+
+      rectangulosFila.push({
+        x: x,
+        ancho: ancho,
+        color: paleta[floor(random(paleta.length))]
+      });
+
+      x += ancho + separacion;
+    }
+
+    filas.push({
+      y: y,
+      rectangulos: rectangulosFila,
+      offset: 0,
+      direccion: direccion,
+      color: color(random(50, 200), random(50, 200), random(50, 200)),
+    });
   }
 }
 
 function draw() {
-  background(0);
-    // Loop through all particles to display and move them
-    for (let particle of particles) {
-        particle.display();
-        particle.move();
+  background(220);
+
+  // Dibujar y actualizar cada fila
+  for (let i = 0; i < filas.length; i++) {
+    let fila = filas[i];
+
+    // Actualizar posición según la dirección
+    fila.offset += velocidad * fila.direccion;
+
+    // Reiniciar offset cuando se sale completamente del canvas
+    if (fila.offset > width) {
+      fila.offset = -width;
+    } else if (fila.offset < -width) {
+      fila.offset = width;
     }
+
+    // Dibujar todos los rectángulos de esta fila
+    strokeWeight(4);
+
+    for (let j = 0; j < fila.rectangulos.length; j++) {
+      let recti = fila.rectangulos[j];
+      let x = recti.x + fila.offset;
+
+      // Ajuste para bucle infinito
+      if (x > width) {
+        x = x - width * 1.5;
+      } else if (x + recti.ancho < 0) {
+        x = x + width * 1.5;
+      }
+
+      // Dibujar rectángulo si está visible en el canvas
+      if (x + recti.ancho > 0 && x < width) {
+        fill(recti.color);
+        rect(x, fila.y, recti.ancho, alturaFila);
+      }
+    }
+  }
 }
-
-// Define the Particle class
-class Particle {
-  constructor() {
-    // Set initial position to a random point within the canvas
-    this.pos = createVector(random(width), random(height));
-    this.size = random(0.5, 2);
-    //Set random transparency value
-    this.alpha = random(150, 255);
-    this.noiseOffset = random(0, 1000);
-    this.rate = random(-1, 1); 
-    this.vertRate = random(-1, 1); 
-  }
-  
-  // Display the particle on the canvas
-  display() {
-    noStroke();
-    fill(255, this.alpha);
-    ellipse(this.pos.x, this.pos.y, this.size);
-  }
-
-  // Update the particle's position
-  move() {
-    // Calculate a noise value for organic movement
-    let noiseValue = noise(this.noiseOffset);
-    this.pos.x += map(noiseValue, 0, 1, -1, 1) * this.rate;
-    this.pos.y += map(noiseValue, 0, 1, -1, 1) * this.vertRate;
-    
-    // Wrap the particle around edges to make it looks like space
-    if (this.pos.x > width) this.pos.x = 0;
-    if (this.pos.x < 0) this.pos.x = width;
-    if (this.pos.y > height) this.pos.y = 0;
-    if (this.pos.y < 0) this.pos.y = height;
-        
-    // Increment the noise offset for the next frame
-    this.noiseOffset += 0.01;
-  }
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }

@@ -10,7 +10,15 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight*2);
+  // create canvas for butterflies and give it an id so CSS can layer it
+  let c = createCanvas(windowWidth, windowHeight*2);
+  c.position(0, 0);
+  c.style('position', 'fixed');
+  c.style('top', '0px');
+  c.style('left', '0px');
+  c.id('mariposasCanvas');
+  // allow pointer events so we can click butterflies
+  c.style('pointer-events', 'auto');
   //background(0,0);
 
   imageMode(CENTER);  
@@ -29,11 +37,14 @@ function setup() {
      'https://ejemplo3.com',
      'https://ejemplo4.com',
    ];
+   // Colores fijos (una paleta). Cada mariposa toma uno.
+   let colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#845EC2'];
    let label = labels[i % labels.length];
    let link = links[i % links.length];
-   //mariposas.push añade un elemento al array mariposas[]
-   mariposas.push(new Marisopa(x, y, w, h, frame1, frame2, label, link));
-  }
+   let rectColor = colors[i % colors.length];
+   //mariposas.push añade un elemento al array mariposas[] (ahora con color fijo)
+   mariposas.push(new Marisopa(x, y, w, h, frame1, frame2, label, link, rectColor));
+ }
 }
 
 function draw() {
@@ -58,7 +69,7 @@ function mousePressed() {
   }
 }
 class Marisopa {
-  constructor(x, y, w, h, img1, img2, label, link) {
+  constructor(x, y, w, h, img1, img2, label, link, rectColor) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -67,6 +78,8 @@ class Marisopa {
     this.img2 = img2;
     this.label = label;
     this.link = link;
+    // Guardar color fijo para el rectángulo (si se pasa como string hexadecimal)
+    this.rectColor = rectColor ? color(rectColor) : color(255, 100, 150);
     this.lastX = this.x; // en el constructor
 
     
@@ -96,7 +109,8 @@ show() {
 
   // Dibujar rectángulo y texto arriba de la mariposa
   push();
-  fill(255, 100, 150); // Color del rectángulo (rosa)
+  // Usar el color fijo asignado a esta mariposa
+  fill(this.rectColor);
   stroke(0);
   strokeWeight(2);
   let rectWidth = 60;
