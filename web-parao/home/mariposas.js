@@ -1,12 +1,12 @@
 let frame1;
 let frame2;
 let mariposas = [];
-let mariposaQty=8;
+let mariposaQty=4;
 
 
 function preload() {
-  frame1 = loadImage('./imgs/mariposa1.png');
-  frame2 = loadImage('./imgs/mariposa2.png');
+  frame1 = loadImage('../imgs/mariposa1.png');
+  frame2 = loadImage('../imgs/mariposa2.png');
 }
 
 function setup() {
@@ -22,8 +22,17 @@ function setup() {
    let y = random(height);
    let w = random(40, 50);
    let h = w;
+   let labels = ['proyectos', 'about me', 'sketches','contacto'];
+   let links = [
+     'https://ejemplo1.com',
+     'https://ejemplo2.com',
+     'https://ejemplo3.com',
+     'https://ejemplo4.com',
+   ];
+   let label = labels[i % labels.length];
+   let link = links[i % links.length];
    //mariposas.push añade un elemento al array mariposas[]
-   mariposas.push(new Marisopa(x, y, w, h, frame1, frame2));
+   mariposas.push(new Marisopa(x, y, w, h, frame1, frame2, label, link));
   }
 }
 
@@ -49,13 +58,15 @@ function mousePressed() {
   }
 }
 class Marisopa {
-  constructor(x, y, w, h, img1, img2) {
+  constructor(x, y, w, h, img1, img2, label, link) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.img1 = img1;
     this.img2 = img2;
+    this.label = label;
+    this.link = link;
     this.lastX = this.x; // en el constructor
 
     
@@ -81,6 +92,23 @@ show() {
   let img = frame === 0 ? this.img1 : this.img2;
   image(img, 0, 0, this.w, this.h);
 
+  pop();
+
+  // Dibujar rectángulo y texto arriba de la mariposa
+  push();
+  fill(255, 100, 150); // Color del rectángulo (rosa)
+  stroke(0);
+  strokeWeight(2);
+  let rectWidth = 60;
+  let rectHeight = 25;
+  rect(this.x - rectWidth / 2, this.y - this.h / 2 - 40, rectWidth, rectHeight);
+
+  // Dibujar texto
+  fill(0); // Color del texto (negro)
+  textAlign(CENTER, CENTER);
+  textSize(12);
+  noStroke();
+  text(this.label, this.x, this.y - this.h / 2 - 27);
   pop();
 }
 move() {
@@ -110,11 +138,8 @@ move() {
 
   onClick() {
     // what happens when clicked
-    console.log("Butterfly clicked!");
-    window.open("https://clifford1one.github.io", "pagina");
-    // you can do things like:
-    // window.open("https://example.com");
-    // or change color, size, etc.
+    console.log("Butterfly clicked! Link: " + this.link);
+    window.open(this.link, "_blank");
   }
 
 }
