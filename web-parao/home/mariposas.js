@@ -3,7 +3,7 @@ let mariposas = [];
 const CONFIG = {
   qty: 4,
   labels: ['proyectos', 'about me', 'sketches', 'contacto'],
-  links: ['https://ejemplo1.com', 'https://ejemplo2.com', 'https://ejemplo3.com', 'https://ejemplo4.com'],
+  links: ['./proyects/proyectos.html', './about/aboutme.html', 'https://editor.p5js.org/clifford1one/sketches', './contacto/contact.html'],
   colors: ['#FF6B6B', '#4ECDC4', '#FFD166', '#845EC2']
 };
 
