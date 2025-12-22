@@ -1,6 +1,11 @@
 html, body {
   margin: 0;
-  height: 100%;
+  min-height: 100vh;
+
+   background-image: url("assets/pattern-wall.png");
+  background-size: cover;       /* escala sin deformar */
+  background-position: center;  /* centrado */
+  background-repeat: no-repeat;
 }
 
 #arcade-section {
