@@ -1,6 +1,7 @@
 let valorCoin;
 
 function setup() {
+  
   createCanvas(400, 400);
   background(220);
   fill(150, 150, 80);
