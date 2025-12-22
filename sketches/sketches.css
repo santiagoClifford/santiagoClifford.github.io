@@ -1,0 +1,38 @@
+#arcade-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#arcade-container {
+  position: relative;
+  width: min(90vw, 600px); /* escala responsiva */
+  aspect-ratio: 3 / 5;    /* proporción del PNG */
+}
+
+#arcade-img {
+  height: 100%;
+  width : auto;
+  display: block;
+  z-index: 2;
+  position: relative;
+  pointer-events: none;
+  opacity=0.3;
+}
+
+/* iframe = pantalla */
+#arcade-screen {
+  position: absolute;
+  z-index: 1;
+  border: none;
+  background: black;
+
+  /* AJUSTA ESTO A TU PNG */
+  left: 18%;
+  top: 16%;
+  width: 64%;
+  height: 38%;
+}
+/* fin iframe = pantalla */
