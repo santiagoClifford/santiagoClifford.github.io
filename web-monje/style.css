@@ -1,0 +1,41 @@
+   body {
+            font-family: Courier 'Courier New', Courier, monospace;
+            overflow: visible;
+            background: #b5b6c9;
+            /* height: 100vh; */
+        }
+  
+  
+    /* Container Principal */
+    .main-container {
+            
+        position: fixed;
+        width: 90vw;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        /* las 3 lineas de top left y tranform, son lo que hace q este en el centro */
+        top: 50%;
+            left: 50%;
+        /* este transform sirve para que el rectMode(CENTER); */
+        transform: translate(-50%,-50%);
+
+        /* borde y relleno para que sea mas facil visualizar mientras programo  */
+        outline: 2px dashed lime;   
+        background: rgba(43,45,66,0.4);
+        flex-direction: column;
+    }
+
+    .sketch-container {
+        width: auto;
+        height: auto;
+        outline: 2px dashed blue;   
+        background: rgba(43,45,66,0.4);
+    }
+
+    .text-container {
+        margin-top: 20px;
+        height: 30vh;
+        outline: 2px dashed pink;   
+        background: rgba(43,45,66,0.4);
+    }
