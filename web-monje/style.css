@@ -1,41 +1,73 @@
-   body {
-            font-family: Courier 'Courier New', Courier, monospace;
-            overflow: visible;
-            background: #b5b6c9;
-            /* height: 100vh; */
-        }
+body {
+    font-family: 'Courier New', Courier, monospace;
+    overflow: visible;
+    background: #b5b6c9;
+    /* height: 100vh; */ 
+}
   
-  
-    /* Container Principal */
-    .main-container {
-            
-        position: fixed;
-        width: 90vw;
-        height: 90vh;
-        display: flex;
-        justify-content: center;
-        /* las 3 lineas de top left y tranform, son lo que hace q este en el centro */
-        top: 50%;
-            left: 50%;
-        /* este transform sirve para que el rectMode(CENTER); */
-        transform: translate(-50%,-50%);
+/* Container Principal */
+.main-container { 
+    position: fixed;
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* las 3 lineas de top left y tranform, son lo que hace q este en el centro */
+    top: 50%;
+        left: 50%;
+    /* este transform sirve para que el rectMode(CENTER); */
+    transform: translate(-50%,-50%);
 
-        /* borde y relleno para que sea mas facil visualizar mientras programo  */
-        outline: 2px dashed lime;   
-        background: rgba(43,45,66,0.4);
-        flex-direction: column;
-    }
+    /* borde y relleno para que sea mas facil visualizar mientras programo  */
+    outline: 2px dashed lime;   
+    background: rgba(43,45,66,0.4);
+    flex-direction: column;
+}
 
-    .sketch-container {
-        width: auto;
-        height: auto;
-        outline: 2px dashed blue;   
-        background: rgba(43,45,66,0.4);
-    }
+.sketch-container {
+    width: auto;
+    height: auto;
+    outline: 2px dashed blue;   
+    background: rgba(43,45,66,0.4);
+    justify-content: center;
+    display: flex;
+}
 
-    .text-container {
-        margin-top: 20px;
-        height: 30vh;
-        outline: 2px dashed pink;   
-        background: rgba(43,45,66,0.4);
-    }
+/* esto dela parte de abajoooo */
+.info-container {
+    outline: 2px dashed lime;   
+    background: rgba(43,45,66,0.4);
+    width: 75vw;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.info-top h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 3rem;
+
+    letter-spacing: 6px;
+}
+
+.info-bottom {
+    font-size: 25px;
+    margin-top: 26px;
+    display: flex;
+    gap: 75px;
+}
+
+.info-bottom p {
+    margin: 0;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.info-bottom p:hover {
+    transform: translateY(-4px);
+    color: red;
+}
